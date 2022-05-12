@@ -2,6 +2,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.swing.text.html.parser.Parser;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.InputStreamReader;
@@ -11,17 +12,40 @@ import java.net.URL;
 
 public class Funzioni {
     public BufferedReader tastiera = new BufferedReader(new InputStreamReader(System.in));
-    public JSONObject json = new JSONObject();
+    private JSONObject json = new JSONObject();
 
-    public String login(JSONObject json){
-        return postRequest("http://localhost/Server_Cinema/src/login.php", json.toJSONString());
+    public String login(){
+        String risp = "";
+        try{
+            System.out.println("Inserire l'username:");
+            String msg = tastiera.readLine();
+            json.put("username", msg);
+
+            System.out.println("Inserire password:");
+            msg = tastiera.readLine();
+            json.put("password", msg);
+
+            //fa il login richiamando il metodo postRequest
+            risp = reciveParser(postRequest("http://localhost/Server_Cinema/src/login.php", json.toJSONString()));
+
+            //se non trova l'account lo fa registrare
+            if(risp.equals("N")){
+                risp="Credenziali errate";
+            }else if (risp.equals("YA")){
+                System.out.println("Benvenuto "+json.get("username"));
+            }else if(risp.equals("YU")){
+                System.out.println("Sig. "+json.get("username")+" questo programma e' dedicato agli amministratori del servizo");
+                System.out.println("La invitiamo a scaricare il programma rivolto agli utenti");
+            }
+
+        }catch (Exception e){
+            System.out.println("Formato credenziali inserite non valido");
+        }
+        return risp;
     }
 
     public static String postRequest(String indirizzo, String messaggio){
         String response = "";
-        String ris = ""; //stringa che riceve i dati inviati dall'api
-        JSONObject json_receive = new JSONObject(); //json utilizzato per ricevere dati specifici
-        JSONParser p = new JSONParser();
 
         if(messaggio != null){
             //messaggio pieno
@@ -56,14 +80,20 @@ public class Funzioni {
             //TODO: spiegare meglio cosa si intende per messaggio vuoto
         }
 
+        return response; //restituisce il dato richiesto
+    }
+
+    public String reciveParser(String s_response){
+        JSONObject json_receive; //json utilizzato per ricevere dati specifici
+        JSONParser p = new JSONParser();
+        String ris = "";
+
         try {
-            json_receive = (JSONObject) p.parse(response);
+            json_receive = (JSONObject) p.parse(s_response);
             ris = (String) json_receive.get("ris");
         }catch (ParseException e) {
             System.out.println("Errore di conversione");
         }
-
-        return ris; //restituisce il dato richiesto
+        return ris;
     }
-
 }
