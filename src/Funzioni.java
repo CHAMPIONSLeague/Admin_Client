@@ -3,19 +3,17 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.text.html.parser.Parser;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Funzioni {
     public BufferedReader tastiera = new BufferedReader(new InputStreamReader(System.in));
     private JSONObject json = new JSONObject();
+    String risp = "";
 
     public String login(){
-        String risp = "";
+
         try{
             System.out.println("Inserire l'username:");
             String msg = tastiera.readLine();
@@ -44,6 +42,28 @@ public class Funzioni {
         return risp;
     }
 
+    public String inserimentoFilm(){
+        String risp="";
+        try{
+            System.out.println("inserire nome film: ");
+            String msg = tastiera.readLine();
+            json.put("nome", msg);
+
+            System.out.println("inserire descrizione: ");
+            msg = tastiera.readLine();
+            json.put("descrizione", msg);
+
+            System.out.println("inserire durata [oo:mm:ss]: ");
+            msg = tastiera.readLine();
+            json.put("durata", msg);
+
+            risp = reciveParser(postRequest("http://localhost/Server_Cinema/src/login.php", json.toJSONString()));
+
+        } catch (IOException e) {
+            return "errore di aggiunta";
+        }
+        return risp;
+    }
     public static String postRequest(String indirizzo, String messaggio){
         String response = "";
 
