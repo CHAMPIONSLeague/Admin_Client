@@ -79,7 +79,7 @@ public class Funzioni {
             System.out.println("Messaggio vuoto");
             //TODO: spiegare meglio cosa si intende per messaggio vuoto
         }
-
+        //returna una stringa
         return response; //restituisce il dato richiesto
     }
 
@@ -96,4 +96,5 @@ public class Funzioni {
         }
         return ris;
     }
+
 }

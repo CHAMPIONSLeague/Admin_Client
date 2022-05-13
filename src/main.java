@@ -12,7 +12,9 @@ public class main {
 
         int scelta = -1;
         while (scelta != 0){
+
             risp = funzione.login();
+
             System.out.println(risp);
             switch (risp){
                 case "Credenziali errate":
