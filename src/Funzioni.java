@@ -13,7 +13,6 @@ public class Funzioni {
     String risp = "";
 
     public String login(){
-
         try{
             System.out.println("Inserire l'username:");
             String msg = tastiera.readLine();
@@ -27,43 +26,51 @@ public class Funzioni {
             risp = reciveParser(postRequest("http://localhost/Server_Cinema/src/login.php", json.toJSONString()));
 
             //se non trova l'account lo fa registrare
-            if(risp.equals("N")){
-                risp="Credenziali errate";
-            }else if (risp.equals("YA")){
-                System.out.println("Benvenuto "+json.get("username"));
-            }else if(risp.equals("YU")){
-                System.out.println("Sig. "+json.get("username")+" questo programma e' dedicato agli amministratori del servizo");
-                System.out.println("La invitiamo a scaricare il programma rivolto agli utenti");
+            switch (risp) {
+                case "N" -> {
+                    risp = "Credenziali errate";
+                }
+                case "YA" -> {
+                    System.out.println("Benvenuto " + json.get("username"));
+                }
+                case "YU" -> {
+                    System.out.println("Sig. " + json.get("username") + " questo programma e' dedicato agli amministratori del servizo");
+                    System.out.println("La invitiamo a scaricare il programma rivolto agli utenti");
+                }
             }
-
         }catch (Exception e){
             System.out.println("Formato credenziali inserite non valido");
         }
         return risp;
     }
 
-    public String inserimentoFilm(){
-        String risp="";
+    public void inserimentoFilm(){
         try{
-            System.out.println("inserire nome film: ");
+            System.out.println("Inserire il nome del film: ");
             String msg = tastiera.readLine();
             json.put("nome", msg);
 
-            System.out.println("inserire descrizione: ");
+            System.out.println("Inserire la descrizione: ");
             msg = tastiera.readLine();
             json.put("descrizione", msg);
 
-            System.out.println("inserire durata [oo:mm:ss]: ");
+            System.out.println("Inserire la durata del film hh:mm");
             msg = tastiera.readLine();
             json.put("durata", msg);
 
-            risp = reciveParser(postRequest("http://localhost/Server_Cinema/src/login.php", json.toJSONString()));
-
-        } catch (IOException e) {
-            return "errore di aggiunta";
+            risp = reciveParser(postRequest("http://localhost/Server_Cinema/src/nuovo_film.php", json.toJSONString()));
+            if (risp.equals("Y")){
+                System.out.println("Nuovo film inserito");
+            }else if (risp.equals("N")){
+                System.out.println("Errore nell'inserimento del film");
+            }else {
+                System.out.println(risp);
+            }
+        } catch (Exception e) {
+            System.out.println("Errore nell'inserimento del film");
         }
-        return risp;
     }
+
     public static String postRequest(String indirizzo, String messaggio){
         String response = "";
 
