@@ -30,8 +30,4 @@ public class main {
         }
     }
 */
-    public static void main(String[] args) {
-        Funzioni funzione = new Funzioni();
-        funzione.inserimentoFilm();
-    }
 }

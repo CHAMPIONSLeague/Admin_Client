@@ -59,6 +59,7 @@ public class Funzioni {
             json.put("durata", msg);
 
             risp = reciveParser(postRequest("http://localhost/Server_Cinema/src/nuovo_film.php", json.toJSONString()));
+
             if (risp.equals("Y")){
                 System.out.println("Nuovo film inserito");
             }else if (risp.equals("N")){
@@ -68,6 +69,56 @@ public class Funzioni {
             }
         } catch (Exception e) {
             System.out.println("Errore nell'inserimento del film");
+        }
+    }
+
+    public void inserimentoSala(){
+        try {
+            System.out.println("Inserire il nome della sala: ");
+            String msg = tastiera.readLine();
+            json.put("nome", msg);
+
+            System.out.println("Inserire la dimensione della sala (massimo 3 cifre): ");
+            msg = tastiera.readLine();
+            json.put("dim sala", msg);
+
+            //nome file destinazione da rivedere (nuova_sala.php)
+            risp = reciveParser(postRequest("http://localhost/Server_Cinema/src/nuova_sala.php", json.toJSONString()));
+
+            if (risp.equals("Y")){
+                System.out.println("Nuova sala inserita");
+            }else if (risp.equals("N")){
+                System.out.println("Errore nell'inserimento della sala");
+            }else {
+                System.out.println(risp);
+            }
+        }catch (Exception e) {
+            System.out.println("Errore nell'inserimento della sala");
+        }
+    }
+
+    public void inserimentoSpettacolo(){
+        try {
+            System.out.println("Inserire la data e l'orario yyyy-mm-dd hh:mm: ");
+            String msg = tastiera.readLine();
+            json.put("data ora", msg);
+
+            System.out.println("Inserire i posti occupati dallo spettacolo: ");
+            msg = tastiera.readLine();
+            json.put("p occupati", msg);
+
+            //nome file destinazione da rivedere (nuovo_spettacolo.php)
+            risp = reciveParser(postRequest("http://localhost/Server_Cinema/src/nuovo_spettacolo.php", json.toJSONString()));
+
+            if (risp.equals("Y")){
+                System.out.println("Nuovo spettacolo inserito");
+            }else if (risp.equals("N")){
+                System.out.println("Errore nell'inserimento dello spettacolo");
+            }else {
+                System.out.println(risp);
+            }
+        }catch (Exception e) {
+            System.out.println("Errore nell'inserimento dello spettacolo");
         }
     }
 
