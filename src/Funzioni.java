@@ -58,10 +58,11 @@ public class Funzioni {
             msg = tastiera.readLine();
             json.put("durata", msg);
 
+            //nome file destinazione da rivedere (nuovo_film.php)
             risp = reciveParser(postRequest("http://localhost/Server_Cinema/src/nuovo_film.php", json.toJSONString()));
 
             if (risp.equals("Y")){
-                System.out.println("Nuovo film inserito");
+                System.out.println("Nuovo film inserito!");
             }else if (risp.equals("N")){
                 System.out.println("Errore nell'inserimento del film");
             }else {
@@ -69,6 +70,62 @@ public class Funzioni {
             }
         } catch (Exception e) {
             System.out.println("Errore nell'inserimento del film");
+        }
+    }
+
+    public void modificaFilm(){
+        try {
+            System.out.println("Modifica nome del film: ");
+            String msg = tastiera.readLine();
+            json.put("nome", msg);
+
+            System.out.println("Modifica la descrizione: ");
+            msg = tastiera.readLine();
+            json.put("descrizione", msg);
+
+            System.out.println("Modifica la durata del film [hh:mm]: ");
+            msg = tastiera.readLine();
+            json.put("durata", msg);
+
+            //nome file destinazione da rivedere (modifica_film.php)
+            risp = reciveParser(postRequest("http://localhost/Server_Cinema/src/modifica_film.php", json.toJSONString()));
+
+            if (risp.equals("Y")){
+                System.out.println("Film modificato con successo!");
+            }else if (risp.equals("N")){
+                System.out.println("Errore nella modifica del film");
+            }else {
+                System.out.println(risp);
+            }
+        } catch (IOException e) {
+            System.out.println("Errore nella modifica del film");
+        }
+    }
+
+    public void eliminazioneFilm(){
+        try{
+            System.out.println("Inserire il nome del film da eliminare: ");
+            String msg = tastiera.readLine();
+            json.put("nome", msg);
+
+            //nome file destinazione da rivedere (eliminazione_film.php)
+            risp = reciveParser(postRequest("http://localhost/Server_Cinema/src/eliminazione_film.php", json.toJSONString()));
+
+            if (risp.equals("Y")){
+                System.out.println("Confermi l'eliminazione? ");
+                if (risp.equals("Y")){
+                    json.put("cmd", "del_film");
+                    System.out.println("film eliminato");
+                }else {
+                    System.out.println(risp);
+                }
+            }else if (risp.equals("N")){
+                System.out.println("Errore eliminazione del film");
+            }else {
+                System.out.println(risp);
+            }
+        }catch (IOException e) {
+            System.out.println("Errore eliminazione del film");
         }
     }
 
@@ -86,7 +143,7 @@ public class Funzioni {
             risp = reciveParser(postRequest("http://localhost/Server_Cinema/src/nuova_sala.php", json.toJSONString()));
 
             if (risp.equals("Y")){
-                System.out.println("Nuova sala inserita");
+                System.out.println("Nuova sala inserita!");
             }else if (risp.equals("N")){
                 System.out.println("Errore nell'inserimento della sala");
             }else {
@@ -97,9 +154,61 @@ public class Funzioni {
         }
     }
 
+    public void modificaSala(){
+        try{
+            System.out.println("Inserire il nuovo nome della sala: ");
+            String msg = tastiera.readLine();
+            json.put("nome", msg);
+
+            System.out.println("Inserire la nuova dimensione della sala (massimo 3 cifre): ");
+            msg = tastiera.readLine();
+            json.put("dim sala", msg);
+
+            //nome file destinazione da rivedere (modifica_sala.php)
+            risp = reciveParser(postRequest("http://localhost/Server_Cinema/src/modifica_sala.php", json.toJSONString()));
+
+            if (risp.equals("Y")){
+                System.out.println("Sala modificata con successo!");
+            }else if (risp.equals("N")){
+                System.out.println("Errore nella modifica della sala");
+            }else {
+                System.out.println(risp);
+            }
+        } catch (IOException e) {
+            System.out.println("Errore nella modifica della sala");
+        }
+    }
+
+    public void eliminazioneSala(){
+        try{
+            System.out.println("Inserire il nome della sala da eliminare: ");
+            String msg = tastiera.readLine();
+            json.put("nome", msg);
+
+            //nome file destinazione da rivedere (eliminazione_sala.php)
+            risp = reciveParser(postRequest("http://localhost/Server_Cinema/src/eliminazione_sala.php", json.toJSONString()));
+
+            if (risp.equals("Y")){
+                System.out.println("Confermi l'eliminazione? ");
+                if (risp.equals("Y")){
+                    json.put("cmd", "del_sala");
+                    System.out.println("sala eliminata");
+                }else {
+                    System.out.println(risp);
+                }
+            }else if (risp.equals("N")){
+                System.out.println("Errore eliminazione della sala");
+            }else {
+                System.out.println(risp);
+            }
+        }catch (IOException e) {
+            System.out.println("Errore eliminazione della sala");
+        }
+    }
+
     public void inserimentoSpettacolo(){
         try {
-            System.out.println("Inserire la data e l'orario yyyy-mm-dd hh:mm: ");
+            System.out.println("Inserire la data e l'orario yyyy-mm-dd hh:mm : ");
             String msg = tastiera.readLine();
             json.put("data ora", msg);
 
@@ -120,6 +229,10 @@ public class Funzioni {
         }catch (Exception e) {
             System.out.println("Errore nell'inserimento dello spettacolo");
         }
+    }
+
+    public void modificaPalinsesto(){
+         //da fare bro
     }
 
     public static String postRequest(String indirizzo, String messaggio){
