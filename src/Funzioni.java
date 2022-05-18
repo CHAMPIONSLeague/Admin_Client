@@ -257,51 +257,32 @@ public class Funzioni {
 
     public void modificaPalinsesto(){
         try {
-            System.out.println("Inserire il codice della prima sala: ");
-            String msg = tastiera.readLine();
-            json.put("codice sala", msg);
+            String scelta = "Si";
 
-            for (int i=0;i>3;i++) {
-                System.out.println("Inserire il codice del film: ");
-                msg = tastiera.readLine();
-                json.put("codice film", msg);
+            while (scelta.equals("Si")) {
+                System.out.println("Inserire il numero della sala: ");
+                String msg = tastiera.readLine();
+                json.put("codice_sala", msg);
 
-                System.out.println("Inserire l'orario (10-12-14 formato hh:mm:ss");
-                msg = tastiera.readLine();
-                json.put("dataorario", msg);
+                for (int i = 0; i > 3; i++) {
+                    System.out.println("Inserire il codice del film: ");
+                    msg = tastiera.readLine();
+                    json.put("codice_film", msg);
+
+                    System.out.println("Inserire l'orario (10-12-14 formato hh:mm:ss");
+                    msg = tastiera.readLine();
+                    json.put("data_orario", msg);
+                }
+
+                System.out.println("Vuoi modificare un'altra sala? (Si,No)");
+                scelta=tastiera.readLine();
             }
 
             //nome file destinazione da rivedere (change_palinsesto.php)
             ris = reciveParser(postRequest("http://localhost/Server_Cinema/src/change_palinsesto.php", json.toJSONString()));
 
             if (ris.equals("Y")){
-                System.out.println("Prima sala modificata con successo!\n ");
-
-                System.out.println("Inserire il codice della seconda sala: ");
-                msg = tastiera.readLine();
-                json.put("codice sala", msg);
-
-                for (int i=0;i<3;i++) {
-                    System.out.println("Inserire il codice del film: ");
-                    msg = tastiera.readLine();
-                    json.put("codice film", msg);
-
-                    System.out.println("Inserire l'orario (10-12-14 formato hh:mm:ss");
-                    msg = tastiera.readLine();
-                    json.put("dataorario", msg);
-                }
-
-                //nome file destinazione da rivedere (change_palinsesto.php)
-                ris = reciveParser(postRequest("http://localhost/Server_Cinema/src/change_palinsesto.php", json.toJSONString()));
-
-                if (ris.equals("Y")){
-                    System.out.println("Entrambe le sale sono state modificate con successo!\n Palinsesto aggiornato!");
-                }else if (ris.equals("N")){
-                    System.out.println("Errore nella modifica del palinsesto");
-                }else {
-                    System.out.println(ris);
-                }
-
+                System.out.println("Palinsesto modificato con successo!");
             }else if (ris.equals("N")){
                 System.out.println("Errore nella modifica del palinsesto");
             }else {
