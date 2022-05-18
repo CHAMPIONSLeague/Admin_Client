@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class main {
-    /*
     public static void main(String[] args) {
         Funzioni funzione = new Funzioni();
         BufferedReader tastiera = new BufferedReader(new InputStreamReader(System.in));
@@ -14,7 +13,7 @@ public class main {
         int scelta = -1;
         while (scelta != 0){
 
-            risp = funzione.login();
+            funzione.modificaPalinsesto();
 
             System.out.println(risp);
             switch (risp){
@@ -29,5 +28,4 @@ public class main {
             }
         }
     }
-*/
 }
