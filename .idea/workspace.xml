@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b10ce678-bb37-48a0-9973-6fd993355bdd" name="Default Changelist" comment="Path aggiornati, ancora qualcosa da aggiustare">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Admin_Client/Funzioni.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Admin_Client/Funzioni.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Funzioni.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Funzioni.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.java" afterDir="false" />
     </list>

@@ -10,19 +10,20 @@ public class main {
         JSONObject json = new JSONObject(); //json utilizzato per inviare dati all'api interessata
         String risp = "";
 
+        funzione.ricercaFilm();
         int scelta = -1;
-        while (scelta != 0){
-            System.out.println(risp);
-            switch (risp){
-                case "Credenziali errate":
-                    scelta = -1; //fa rifare il login
-                    break;
-                case "YA":
-                    //TODO: da qua creare il ciclo while e mettere il menu admin
-                    break;
-                case "YU":
-                    return;
-            }
-        }
+//        while (scelta != 0){
+//            System.out.println(risp);
+//            switch (risp){
+//                case "Credenziali errate":
+//                    scelta = -1; //fa rifare il login
+//                    break;
+//                case "YA":
+//                    //TODO: da qua creare il ciclo while e mettere il menu admin
+//                    break;
+//                case "YU":
+//                    return;
+//            }
+//        }
     }
 }

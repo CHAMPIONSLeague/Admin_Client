@@ -46,6 +46,7 @@ public class Funzioni {
         return ris;
     }
 
+    //Errore di conversione
     public void inserimentoFilm(){
         try{
             System.out.println("Inserire il nome del film: ");
@@ -105,6 +106,7 @@ public class Funzioni {
         }
     }
 
+    //campi mancanti
     public void eliminazioneFilm(){
         try{
             System.out.println("Inserire il nome del film da eliminare: ");
@@ -132,6 +134,7 @@ public class Funzioni {
         }
     }
 
+    //Funziona 24-05 ORE 10:13
     public void ricercaFilm(){
         JSONObject json_receive;
         try{
@@ -155,6 +158,7 @@ public class Funzioni {
         }
     }
 
+    //Errore di conversione
     public void inserimentoSala(){
         try {
             System.out.println("Inserire il nome della sala: ");
@@ -205,6 +209,7 @@ public class Funzioni {
         }
     }
 
+    //campi mancanti
     public void eliminazioneSala(){
         try{
             System.out.println("Inserire il nome della sala da eliminare: ");
@@ -232,6 +237,7 @@ public class Funzioni {
         }
     }
 
+    //Errore di conversione
     public void inserimentoSpettacolo(){
         try {
             System.out.println("Inserire la data e l'orario yyyy-mm-dd hh:mm:ss : ");
