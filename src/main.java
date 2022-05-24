@@ -12,9 +12,6 @@ public class main {
 
         int scelta = -1;
         while (scelta != 0){
-
-            funzione.modificaPalinsesto();
-
             System.out.println(risp);
             switch (risp){
                 case "Credenziali errate":

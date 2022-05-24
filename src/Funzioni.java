@@ -12,6 +12,7 @@ public class Funzioni {
     private JSONObject json = new JSONObject();
     String ris = "";
     JSONParser p = new JSONParser();
+    private final String address = "http://clowncinema.altervista.org/src/admin/";
 
     public String login(){
         try{
@@ -24,7 +25,7 @@ public class Funzioni {
             json.put("password", msg);
 
             //fa il login richiamando il metodo postRequest
-            ris = reciveParser(postRequest("http://localhost/Server_Cinema/src/login.php", json.toJSONString()));
+            ris = reciveParser(postRequest("http://clowncinema.altervista.org/src/login.php", json.toJSONString()));
 
             //se non trova l'account lo fa registrare
             switch (ris) {
@@ -60,7 +61,7 @@ public class Funzioni {
             json.put("durata", msg);
 
             //nome file destinazione da rivedere (nuovo_film.php)
-            ris = reciveParser(postRequest("http://localhost/Server_Cinema/src/nuovo_film.php", json.toJSONString()));
+            ris = reciveParser(postRequest(address+"nuovo_film.php", json.toJSONString()));
 
             if (ris.equals("Y")){
                 System.out.println("Nuovo film inserito!");
@@ -74,6 +75,7 @@ public class Funzioni {
         }
     }
 
+    //da controllare
     public void modificaFilm(){
         try {
             System.out.println("Modifica nome del film: ");
@@ -110,7 +112,7 @@ public class Funzioni {
             json.put("nome_film", msg);
 
             //nome file destinazione da rivedere (eliminazione_film.php)
-            ris = reciveParser(postRequest("http://localhost/Server_Cinema/src/eliminazione_film.php", json.toJSONString()));
+            ris = reciveParser(postRequest(address+"delete_film.php", json.toJSONString()));
 
             if (ris.equals("Y")){
                 System.out.println("Confermi l'eliminazione? ");
@@ -130,6 +132,7 @@ public class Funzioni {
         }
     }
 
+    //da controllare
     public void ricercaFilm(){
         JSONObject json_receive;
         try{
@@ -164,7 +167,7 @@ public class Funzioni {
             json.put("dim sala", msg);
 
             //nome file destinazione da rivedere (nuova_sala.php)
-            ris = reciveParser(postRequest("http://localhost/Server_Cinema/src/nuova_sala.php", json.toJSONString()));
+            ris = reciveParser(postRequest(address+"nuovo_sala.php", json.toJSONString()));
 
             if (ris.equals("Y")){
                 System.out.println("Nuova sala inserita!");
@@ -178,6 +181,7 @@ public class Funzioni {
         }
     }
 
+    //da controllare
     public void modificaSala(){
         try{
             System.out.println("Inserire il nuovo nome della sala: ");
@@ -210,7 +214,7 @@ public class Funzioni {
             json.put("nome", msg);
 
             //nome file destinazione da rivedere (eliminazione_sala.php)
-            ris = reciveParser(postRequest("http://localhost/Server_Cinema/src/eliminazione_sala.php", json.toJSONString()));
+            ris = reciveParser(postRequest(address+"delete_sala.php", json.toJSONString()));
 
             if (ris.equals("Y")){
                 System.out.println("Confermi l'eliminazione? ");
@@ -230,6 +234,7 @@ public class Funzioni {
         }
     }
 
+    //da controllare
     public void inserimentoSpettacolo(){
         try {
             System.out.println("Inserire la data e l'orario yyyy-mm-dd hh:mm:ss : ");
@@ -255,6 +260,7 @@ public class Funzioni {
         }
     }
 
+    //da controllare
     public void modificaPalinsesto(){
         try {
             String scelta = "Si";
@@ -296,7 +302,7 @@ public class Funzioni {
     public void eliminaPalinsesto(){
         try {
             //nome file destinazione da rivedere (delete_palinsesto.php)
-            ris = reciveParser(postRequest("http://localhost/Server_Cinema/src/delete_palinsesto.php", ""));
+            ris = reciveParser(postRequest(address+"delete_palinsesto.php", ""));
 
             if (ris.equals("Y")){
                 System.out.println("Palinsesto eliminato con successo");
